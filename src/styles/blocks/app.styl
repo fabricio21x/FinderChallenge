@@ -1,3 +1,87 @@
 .app
-    max-width 960px
-    margin 0 auto
+  max-width 1280px
+  margin 0 auto
+  header
+    position fixed
+    padding 30px 0
+    background-color #fff
+  .content
+    padding-top 92px
+  .search-bar
+    button
+      margin 0 5px
+  footer
+    text-align right
+    margin-right 10%
+    margin-bottom 30px
+    margin-top 30px
+
+
+.sidebar
+  padding-top 92px
+
+.sidebar-item
+  margin 20px 0
+  .sidebar-list
+    padding-left 30px
+    padding-right 60px
+    li
+      padding 5px 10px
+      margin 10px
+
+.sidebar-title
+  font-size 16px
+  font-weight 700
+  margin-bottom 20px
+
+//Class to set a link active, works with ng-class
+.link-active
+  color black
+  text-decoration none
+  pointer-events none
+
+//displays the submenu
+.manage-active
+  background-color rgba(198,195,216,0.75)
+  .manage-link
+    display block
+
+.manage-link
+  display none
+  margin-top 5px
+  font-size 12px
+  span
+    margin 0 5px
+
+.pagination-gap
+  li
+    display inline-block
+    a
+      padding 5px 10px
+      text-decoration none
+      margin: 0 4px
+      border-radius: 8px !important
+      color: #76838f
+      transition: background-color 0.45s
+      transition: border-color 0.45s
+    a:hover
+      background-color: transparent
+      border-color: blue
+      color: blue
+      transition: background-color 0.45s
+      transition: border-color 0.45
+
+.pagination>.pag-active>a,
+.pagination>.pag-active>a:focus,
+.pagination>.pag-active>a:hover
+  z-index: 3
+  color: white
+  cursor: default
+  background-color: blue
+  border-color: blue
+
+.disabled
+  color gray
+  border gray
+  opacity .5
+

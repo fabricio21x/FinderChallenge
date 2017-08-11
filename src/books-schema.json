@@ -60,6 +60,10 @@
       {
         "url": "/#/comedia-ingles",
         "label": "comedias en ingles"
+      },
+      {
+        "url": "/#/angel",
+        "label": "angel"
       }
     ]
   },

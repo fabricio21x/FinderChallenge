@@ -3,11 +3,14 @@ var pug = require("gulp-pug");
 var stylus = require("gulp-stylus");
 var rupture = require("rupture");
 var browserSync = require("browser-sync");
+var concat = require("gulp-concat");
+var clean = require("gulp-clean");
+var history = require('connect-history-api-fallback');
 
 var pathsView = [
     "src/index.pug",
-    "!src/blocks/*.pug",
-    "!src/blocks/**/*.pug"
+    "src/blocks/*.pug",
+    "src/blocks/**/*.pug"
 ];
 var pathsViewToWatch = [
     "src/*.pug",
@@ -43,6 +46,16 @@ var pathData = [
     "src/*.json"
 ];
 
+var taskCleanSelf = function (){
+    gulp.src('./public/*')
+      .pipe(clean({force: true}));
+    gulp.src('./public/scripts/bundled.js')
+      .pipe(clean({force: true}));
+};
+gulp.task("clean", function (){
+    return taskCleanSelf();
+});
+
 var taskPugSelf = function(){
     return gulp.src(pathsView)
         .pipe(pug({
@@ -67,9 +80,10 @@ gulp.task("styles", function(){
 });
 
 var taskScriptsSelf = function(){
-    return gulp.src(pathsScripts)
+    return gulp.src('src/scripts/bundled.js')
         .pipe(gulp.dest("./public/scripts"));
 };
+
 gulp.task("scripts", function(){
     return taskScriptsSelf();
 });
@@ -112,10 +126,12 @@ gulp.task("ServerBrowserSync", function(){
     browserSync.init({
         port: 8089,
         server: {
-            baseDir: "./public/"
+            baseDir: "./public/",
+            middleware: [ history() ]
         }
     });
 });
 
-gulp.task("build", ["view", "styles", "scripts", "data", "vendor"]);
+gulp.task("build", ["view","styles", "scripts", "data", "vendor"]);
+
 gulp.task("server", ["ServerBrowserSync", "watch"]);
