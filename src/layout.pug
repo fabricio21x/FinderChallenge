@@ -6,12 +6,13 @@ html(lang="es")
         meta(charset="utf-8")
         meta(viewport="width=device-width, initial-scale=1.0")
         link(href="https://fonts.googleapis.com/css?family=Proxima+Nova", rel="stylesheet", type="text/css")
-        link(href="/vendor/pure/pure-min.css", rel="stylesheet")
-        link(href="/styles/index.css", rel="stylesheet")
 
-        //- Third party
-        link(href="/vendor/awesomplete/awesomplete.css", rel="stylesheet")
-        link(href="/vendor/angular-auto-complete/angular-auto-complete.css", rel="stylesheet")
+        //- Third party | Bootstrap is only for the typeahead functionality
+        link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+        link(href="/vendor/pure/pure-min.css", rel="stylesheet")
+
+        //- Self defined styles
+        link(href="/styles/index.css", rel="stylesheet")
 
         //- Icons:
         //- Fontawesome
@@ -26,9 +27,7 @@ html(lang="es")
 
         //- third party libraries
         script(src="/vendor/underscore/underscore-min.js")
-        script(src="/vendor/awesomplete/awesomplete.js")
-        script(src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js")
-        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+        //script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
 
         //- bundled controllers
         script(src="/scripts/bundled.js")

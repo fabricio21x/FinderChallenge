@@ -1,13 +1,13 @@
 .app.pure-g
     header.pure-u-1.main-header
-        .pure-u-1-3.logo
-          h1 {{logo}}
-        form(id="searchForm" name="searchForm" ng-submit="submitSearch()").pure-u-1-3.search-bar
-          input.awesomplete(id="searchBox" name="searchBox" type="text" placeholder="Búsqueda de libros" ng-model="searchText" ng-minlength="3" ng-keyup="$event.keyCode == 13 && searchForm.$valid && myFunc()" list="booksList" data-minchars="3" data-maxitems="7" required)
-          datalist(id="booksList")
-            option(ng-repeat="bk in data") {{bk.title}}
+      .pure-u-1-3.logo
+        h1 {{logo}}
+      form(id="searchForm" name="searchForm" ng-submit="submitSearch()").search-bar
+        .search-bar-input
+          input(id="searchBox" name="searchBox" type="text" placeholder="Búsqueda de libros" ng-model="searchText" ng-minlength="3" ng-keyup="$event.keyCode == 13 && searchForm.$valid && myFunc()" uib-typeahead="book as book.title for book in data | filter:{title:$viewValue} | limitTo:7" typeahead-min-length="3"  required)
           button(ng-disabled="!searchForm.$valid" ng-class="{disabled: !searchForm.$valid}") Buscar
-          a(href="#" ng-click="saveSearch()") Guardar búsqueda
+        a(href="#" ng-click="saveSearch()") Guardar búsqueda
+      i.toggle-menu.fa.fa-bars.fa-2x(aria-hidden="true" ng-click="toggleMenu=!toggleMenu")
         //- .pure-u-7-24
         //- .pure-u-1-3
     aside.sidebar.pure-u-1-4
@@ -20,7 +20,6 @@
               a(href="#" ng-click="editSavedLink(link)") Editar
               span |
               a(href="#" ng-click="deleteSavedLink(link)") Eliminar
-
       .sidebar-item
         .sidebar-title Categorías
         ul.sidebar-list
@@ -28,7 +27,6 @@
             a(href="#") Todos
           li(ng-repeat="category in categories")
             a(href="#" ng-click="executeFilterByCategory(category)") {{category.label}}
-
       .sidebar-item
         .sidebar-title Idioma
         ul.sidebar-list
@@ -36,7 +34,6 @@
             a(href="#") Todos
           li(ng-repeat="lang in langs")
             a(href="#" ng-click="executeFilterByLang(lang)") {{lang.label}}
-
       .sidebar-item
         .sidebar-title Publlicación
         ul.sidebar-list
@@ -44,10 +41,50 @@
             a(href="#") Todos
           li(ng-repeat="frec in frecuencia")
             a(href="#" ng-click="executeFilterByDate(frec)") {{frec.label}}
-
       .sidebar-item
         .sidebar-title Presentación
         ul.sidebar-list
+          li(ng-repeat="edition in editions")
+            a(href="#" ng-click="executeFilterByEdition(edition)") {{edition.label}}
+
+    .sidebar-mobile.pure-u-1-1(ng-show="toggleMenu")
+      .sidebar-item
+        .sidebar-title(ng-click="toggleItem(1)") Busquedas Guardadas
+        ul.sidebar-list(ng-show="toggleItem1")
+          li(ng-repeat="link in savedLinks" ng-class="{'manage-active': $index == selectedLink}" ng-click="setActive($index)")
+            a(href="#" ng-click="executeSavedSearch(link)") {{link.label}}
+            .manage-link
+              a(href="#" ng-click="editSavedLink(link)") Editar
+              span |
+              a(href="#" ng-click="deleteSavedLink(link)") Eliminar
+
+      .sidebar-item
+        .sidebar-title(ng-click="toggleItem(2)") Categorías
+        ul.sidebar-list(ng-show="toggleItem2")
+          li
+            a(href="#") Todos
+          li(ng-repeat="category in categories")
+            a(href="#" ng-click="executeFilterByCategory(category)") {{category.label}}
+
+      .sidebar-item
+        .sidebar-title(ng-click="toggleItem(3)") Idioma
+        ul.sidebar-list(ng-show="toggleItem3")
+          li
+            a(href="#") Todos
+          li(ng-repeat="lang in langs")
+            a(href="#" ng-click="executeFilterByLang(lang)") {{lang.label}}
+
+      .sidebar-item
+        .sidebar-title(ng-click="toggleItem(4)") Publlicación
+        ul.sidebar-list(ng-show="toggleItem4")
+          li
+            a(href="#") Todos
+          li(ng-repeat="frec in frecuencia")
+            a(href="#" ng-click="executeFilterByDate(frec)") {{frec.label}}
+
+      .sidebar-item
+        .sidebar-title(ng-click="toggleItem(5)") Presentación
+        ul.sidebar-list(ng-show="toggleItem5")
           li(ng-repeat="edition in editions")
             a(href="#" ng-click="executeFilterByEdition(edition)") {{edition.label}}
 

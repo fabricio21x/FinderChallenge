@@ -2,8 +2,47 @@ angular.module("FinderChallenge")
 .controller('MainCtrl', ['$scope','$http','books', function ($scope,$http,books) {
   $scope.logo = "Finder Challenge";
   $scope.enableSearch = true;
-  $scope.searchText = ""
-  $scope.books = [];
+  $scope.searchText = "";
+
+  $scope.toggleMenu = false;
+  $scope.toggleItem1 = false;
+  $scope.toggleItem2 = false;
+  $scope.toggleItem3 = false;
+  $scope.toggleItem4 = false;
+  $scope.toggleItem5 = false;
+
+  function resetValues(){
+    $scope.toggleItem1 = false;
+    $scope.toggleItem2 = false;
+    $scope.toggleItem3 = false;
+    $scope.toggleItem4 = false;
+    $scope.toggleItem5 = false;
+  }
+
+  $scope.toggleItem = function(number) {
+    switch(number) {
+      case 1:
+        resetValues();
+        $scope.toggleItem1 = !$scope.toggleItem1;
+        break;
+      case 2:
+        resetValues();
+        $scope.toggleItem2 = !$scope.toggleItem2;
+        break;
+      case 3:
+        resetValues();
+        $scope.toggleItem3 = !$scope.toggleItem3;
+        break;
+      case 4:
+        resetValues();
+        $scope.toggleItem4 = !$scope.toggleItem4;
+        break;
+      case 5:
+        resetValues();
+        $scope.toggleItem5 = !$scope.toggleItem5;
+        break;
+    }
+  }
 
   $scope.filterBooks = {
     title: ""
@@ -12,7 +51,10 @@ angular.module("FinderChallenge")
   $scope.data = books.data;
 
   $scope.submitSearch = function (){
-    $scope.filterBooks.title = $scope.searchText;
+    if (!(typeof $scope.searchText.title === 'string'))
+      $scope.filterBooks.title = $scope.searchText;
+    else
+      $scope.filterBooks.title = $scope.searchText.title;
   };
 
   $scope.selectedLink = 0;

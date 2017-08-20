@@ -1,4 +1,4 @@
-angular.module('FinderChallenge',['ui.router','angularUtils.directives.dirPagination','ngSanitize'])
+angular.module('FinderChallenge',['ui.router','angularUtils.directives.dirPagination','ngSanitize','ngAnimate','ui.bootstrap'])
 .factory('principal',['$http','$q', function ($http,$q){
   return {
     getData: function (){
